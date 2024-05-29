@@ -38,7 +38,7 @@ RSpec.describe Hanikamu::Services::Async, type: :job do
       end
 
       subject { service::Async.call!(some_string: 'hey') }
-      it 'returns a Hanikamu::ActiveCommand::Error' do
+      it 'calls the the service .call! method' do
         subject
         expect(service).to have_received(:call!).with(some_string: 'hey')
       end
