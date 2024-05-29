@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hanikamu-active_async (0.1.0)
+    hanikamu-services-async (0.1.0)
       activejob (< 8)
       hanikamu-service (~> 0.1)
 
@@ -136,8 +136,8 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (>= 2)
-  hanikamu-active_async!
   hanikamu-service (~> 0.1.0)
+  hanikamu-services-async!
   pry (>= 0.14.0)
   rake
   rspec (~> 3.0)
