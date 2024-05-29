@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'active_support/concern'
+require 'active_job'
+require 'active_support/core_ext/module/introspection'
+
 module Hanikamu
   module Services
     # You can call from the operation the method
@@ -30,7 +34,7 @@ module Hanikamu
         base.class_eval do
           const_set(
             :Async,
-            Class.new(ApplicationJob) do
+            Class.new(ActiveJob::Base) do
               class << self
                 def call!(args = {})
                   perform_later(args: args, bang: true)
@@ -42,7 +46,13 @@ module Hanikamu
               end
 
               def perform(args:, bang:)
-                self.class.module_parent.send(bang ? :call! : :call, args)
+                parent_name_space.send(bang ? :call! : :call, args)
+              end
+
+              private
+
+              def parent_name_space
+                self.class.name.deconstantize.constantize
               end
             end
           )

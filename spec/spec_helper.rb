@@ -15,7 +15,9 @@ require 'pry'
 RSpec.configure do |config|
   config.disable_monkey_patching!
   config.filter_run_when_matching :focus
-
+  config.before(:each) do
+    ActiveJob::Base.queue_adapter = :inline
+  end
   config.before do
     stub_const('TestFooModule', Module.new)
   end
