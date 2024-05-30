@@ -46,7 +46,7 @@ module Hanikamu
               end
 
               def perform(args:, bang:)
-                parent_name_space.send(bang ? :call! : :call, args)
+                parent_name_space.public_send(bang ? :call! : :call, args)
               end
 
               private
